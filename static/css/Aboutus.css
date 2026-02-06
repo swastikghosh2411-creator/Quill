@@ -1,0 +1,120 @@
+* {
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E3DFFF;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Page wrapper */
+.about-page {
+    height: calc(100vh - 120px); 
+}
+
+/* Main layout */
+.about-main {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    padding: 40px 60px; 
+}
+
+/* Image wrapper */
+.image-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;   
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+/* Heading on image */
+.about-header {
+    position: static;       
+    text-align: center;
+    margin-bottom: 16px;    
+}
+.about-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #482d6f;
+    margin-bottom: 6px;
+}
+
+.about-header p {
+    font-size: 1.2rem;
+    color: #8353c6;
+    opacity: 0.85;
+}
+/* Image */
+.girl-img {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    transform: scaleX(-1);
+}
+/* Right content */
+.content {
+    width: 50%;
+    padding: 40px;
+    margin-top: -40px;
+}
+
+/* Cards */
+.mission,
+.vision {
+    background-color: #F8F6FF;
+    padding: 30px 40px; 
+    border-radius: 18px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(72, 45, 111, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mission {
+    margin-bottom: 30px;
+}
+
+.mission::before,
+.vision::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20px;
+    bottom: 20px;
+    width: 6px;
+    background: linear-gradient(180deg, #8353c6, #482d6f);
+    border-radius: 10px;
+}
+
+/* Hover */
+.mission:hover,
+.vision:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(72, 45, 111, 0.2);
+}
+
+/* Text */
+.content h2 {
+    color: #482d6f;
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.content p {
+    color: #8353c6;
+    text-align: center;
+    font-size: 1.35rem;
+    line-height: 1.7;
+}
+
+.nav-elements > div:hover, .nav-about {
+    background-color: rgba(163, 137, 244, 0.2);  
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);    
+}

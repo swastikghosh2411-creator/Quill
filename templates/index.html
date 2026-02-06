@@ -1,74 +1,43 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 {% endblock %}
-
 {% block body %}
 
-<header>
-    <div class="navbar">
-        <div class="nav-logo">
-            <img src="{{ url_for('static', filename='images/logo.png') }}"
-                alt="Quill logo"
-                class="logo-img">
+<section class="hero">
+    <div class="left-element">
+        <h1 id="welcome"> Welcome to Quill! </h1>
+        <p id="note"> Lets make studying fun and easy </p>
+
+        <div class="get-started" onclick="location.href='{{ url_for('signup') }}'">
+            <p>Sign In</p>
         </div>
-        <div class="nav-elements hover-feature">
-            <div class = "nav-home">
-                <p>
-                    Home
-                </p>
-            </div>
-            <div class = "nav-about">
-                <p>
-                    About Us
-                </p>
-            </div>
-            <div class = "nav-contact">
-                <p>
-                    Contact
-                </p>
-            </div>
-                <div class="nav-signup hover-feature" onclick="location.href='{{ url_for('signup') }}'">
-                    <p>Sign Up</p>
-                </div>
-
-
-            </div>
-            
-
-        </div>
-        <section class="hero">
-            <div class="left-element">
-            <h1 id = "welcome"> Welcome to Quill! </h1>
-            <p id="note"> Lets make studying fun and easy </p>
-            <div class="get-started" onclick="location.href='{{ url_for('signup') }}'">
-                <p>Sign In</p>
-            </div>
-
-            </div>
-            <img src ="{{ url_for('static', filename='images/girl.png') }}"
-                alt="Girl img"
-                class="girl-img">
-        </section>
-        <section class = "features">
-            <h2> Boost your productivity with quill!</h2>
-            <p> Awesome features to help you succeed </p>
-            <img src = "{{ url_for('static', filename='images/pomodoro-feature.png') }}"
-                alt=" Pomodoro"
-                class = "pomodoro-feature-img">
-            <img src = "{{ url_for('static', filename='images/taskmanagement-feature.png') }}"
-                alt=" Task management"
-                class = "pomodoro-feature-img">
-            <img src = "{{ url_for('static', filename='images/progress-feature.png') }}"
-                alt=" View Progess"
-                class = "progess-feature-img">
-        </section>
     </div>
 
-</header>
+    <img src="{{ url_for('static', filename='images/girl.png') }}"
+         alt="Girl img"
+         class="girl-img">
+</section>
 
+<section class="features">
+    <h2 id="features-heading"> Boost your productivity with quill!</h2>
+    <p id="features-body"> Awesome features to help you succeed </p>
 
+    <div class="feature-icons">
+        <img src="{{ url_for('static', filename='images/pomodoro-feature.png') }}"
+             alt="Pomodoro"
+             class="featureimg">
 
+        <img src="{{ url_for('static', filename='images/taskmanagement-feature.png') }}"
+             alt="Task management"
+             class="featureimg">
 
+        <img src="{{ url_for('static', filename='images/progress-feature.png') }}"
+             alt="View Progress"
+             class="featureimg">
+    </div>
+</section>
 
 {% endblock %}

@@ -33,7 +33,7 @@ class User(db.Model):
     
 #Form class
 class UserForm(FlaskForm):
-    username = StringField("Enter username here",validators= [DataRequired(), Length(min=5, max =20)])
+    username = StringField(validators= [DataRequired(), Length(min=5, max =20)])
     email = StringField("Enter email here",validators= [DataRequired(), Email (message = "Please enter valid email address!")])
     password = PasswordField("Enter password here",validators= [DataRequired(), 
     Length(min = 8, message = "Password must be atleast 8 characters long"), Regexp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])\S{8,}$', message = 'Password must contain atleast one lowercase, uppercase, special character and number')])
@@ -44,6 +44,14 @@ class UserForm(FlaskForm):
 @app.route('/')
 def index():
     return render_template("index.html")
+
+@app.route('/Aboutus')
+def Aboutus():
+    return render_template("Aboutus.html")
+    
+@app.route('/Contact')
+def Contact():
+    return render_template("Contact.html")
 
 @app.route('/signup', methods =['GET','POST'])
 def signup():

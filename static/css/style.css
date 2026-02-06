@@ -4,56 +4,6 @@
     box-sizing: border-box;
 }
 
-.navbar{
-    height: 60px;
-    background-color: #E3DFFF;
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;     
-    position: fixed;
-    width: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
-}
-
-.nav-logo{
-    height: 40px;      
-    width: auto;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
-
-.logo-img{
-    height: 45px;              
-    width: auto;
-    object-fit: contain;
-}
-
-.nav-elements{
-    color:#A389F4;
-    font-size: 1.25rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 60px;
-    display: flex;
-}
-
-
-.nav-elements > div {
-    padding: 6px 12px;           
-    border-radius: 8px;           
-    transition: all 0.3s ease;    
-    cursor: pointer;             
-}
-
-
-.nav-elements > div:hover, .nav-home {
-    background-color: rgba(163, 137, 244, 0.2);  
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);    
-}
 
 .hero{
     background-color: #E3DFFF;
@@ -65,7 +15,7 @@
 }
 
 .features{
-    min-height: 100vh;
+    padding-bottom: 10rem;  
 }
 
 #welcome{
@@ -116,3 +66,60 @@
     transform: scale(1.05);
     transition: all 0.3s ease;
 }
+.features{
+    background-color: #F2F0FF;
+}
+.featureimg{
+    width :30rem;
+    height: 30rem;
+    
+}
+#features-heading{
+    text-align: center;
+    font-size: 2.5rem;
+    color:#482d6f;
+    padding-top: 60px;
+    padding-bottom: 25px;
+
+}
+
+#features-body{
+    text-align: center;
+    font-size: 1.5rem;
+    color: #482d6f;
+    padding-bottom: 40px;
+}
+
+.featureimg:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease; 
+}
+
+.pomodoro{
+    margin-left: 50px;
+    width:31rem;
+    height: 31rem;
+}
+
+.feature-icons{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+}
+
+.footer-panel{
+    display: flex;
+    background-color: #E3DFFF;
+    color: #8353c6;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 200px;
+}
+
+.nav-elements > div:hover, .nav-home {
+    background-color: rgba(163, 137, 244, 0.2);  
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);    
+}
+

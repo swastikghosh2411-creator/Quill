@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Aboutus.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<section class="about-page">
+
+    <!-- Main flex row -->
+    <section class="about">
+        <div class="about-main">
+
+            <!-- Image + Heading wrapper -->
+            <div class="image-container">
+                <header class="about-header">
+                    <h1>About Quill</h1>
+                    <p>Making studying simple, efficient and stress-free.</p>
+                </header>
+
+                <img
+                    src="{{ url_for('static', filename='images/girl.png') }}"
+                    alt="Girl studying illustration"
+                    class="girl-img"
+                >
+            </div>
+
+            <!-- Right content -->
+            <div class="content">
+                <div class="mission">
+                    <h2>Our Mission</h2>
+                    <p>
+                        Our mission is to help students study smarter, not longer.
+                        We aim to simplify learning by providing intuitive tools that help students
+                        plan effectively, stay focused, and build consistent study habits.
+                        By combining structure, flexibility, and insight, we empower learners to
+                        take control of their time, reduce academic stress, and make steady progress
+                        toward their goals.
+                    </p>
+                </div>
+
+                <div class="vision">
+                    <h2>Our Vision</h2>
+                    <p>
+                        Our vision is to become a trusted study companion for students everywhere.
+                        We imagine a future where students feel confident, organized, and motivated—
+                        where technology supports learning rather than overwhelming it.
+                        Through thoughtful design and meaningful analytics, we strive to create an
+                        environment that encourages growth, self-discipline, and lifelong learning.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</section>
+
+{% endblock %}

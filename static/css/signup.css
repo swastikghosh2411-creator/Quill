@@ -1,0 +1,11 @@
+*{
+    font-family: 'Nunito', sans-serif;
+}
+
+body{
+    background-color:#E3DFFF ;
+}
+
+.page{
+    height: calc(100vh - 120px); 
+}
