@@ -65,8 +65,7 @@ body {
 }
 
 /* Cards */
-.mission,
-.vision {
+.page {
     background-color: #F8F6FF;
     padding: 30px 40px; 
     border-radius: 18px;

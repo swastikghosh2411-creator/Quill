@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard">
+
+    <!-- Top Section -->
+    <section class="top-section">
+
+        <div class="welcome-card">
+            <h1>Welcome back!</h1>
+            <p>Ready to focus and make progress today?</p>
+
+            <button class="study-btn">Study Now</button>
+        </div>
+
+        <div class="stats-card">
+            <h2>This Week You Studied:</h2>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="number">12</span>
+                    <span class="label">Total Hours</span>
+                </div>
+
+                <div class="stat">
+                    <span class="number">2</span>
+                    <span class="label">Avg / Day</span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Overview -->
+    <h2 class="overview-title">Overview</h2>
+
+    <section class="overview">
+
+        <!-- Tasks -->
+        <div class="card-tasks-card">
+
+            <h3>Today's Tasks</h3>
+
+            <ul class="task-list">
+                <li>
+                    <input type="checkbox">
+                    Finish DSA practice
+                </li>
+
+                <li>
+                    <input type="checkbox">
+                    Watch DBMS lecture
+                </li>
+
+                <li>
+                    <input type="checkbox">
+                    Review notes
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- Calendar -->
+        <div class="card calendar-card">
+
+            <h3>Calendar</h3>
+
+            <div class="calendar-placeholder">
+                <p>Your study schedule will appear here.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

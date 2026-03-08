@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -6,7 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Email, Length, Regexp, EqualTo
 
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 #Secret Key
@@ -39,6 +39,20 @@ class UserForm(FlaskForm):
     Length(min = 8, message = "Password must be atleast 8 characters long"), Regexp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])\S{8,}$', message = 'Password must contain atleast one lowercase, uppercase, special character and number')])
     confirm_password = PasswordField("Re-enter password", validators = [DataRequired(), EqualTo('password', "password must match")])
     submit = SubmitField("Submit")
+
+# Login Form
+class LoginForm(FlaskForm):
+    email = StringField(
+        "Email",
+        validators=[DataRequired(), Email(message="Please enter a valid email")]
+    )
+
+    password = PasswordField(
+        "Password",
+        validators=[DataRequired()]
+    )
+
+    submit = SubmitField("Login")
 
 
 @app.route('/')
@@ -75,6 +89,48 @@ def signup():
         flash('Account created successfully!', 'success')
         return redirect(url_for('index'))
     return render_template("signup.html", username = username, email = email, form = form)
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+
+        user = User.query.filter_by(email=form.email.data).first()
+
+        if user and check_password_hash(user.password, form.password.data):
+
+            session['user_id'] = user.id
+            session['username'] = user.username
+
+            flash("Login successful!", "success")
+
+            return redirect(url_for('dashboard'))
+
+        else:
+            flash("Invalid email or password")
+
+    return render_template("login.html", form=form)
+
+
+@app.route('/dashboard')
+def dashboard():
+
+    if 'user_id' not in session:
+        flash("Please login first", "warning")
+        return redirect(url_for('login'))
+
+    return render_template("dashboard.html", username=session['username'])
+
+@app.route('/logout')
+def logout():
+
+    session.pop('user_id', None)
+    session.pop('username', None)
+
+    flash("You have been logged out", "info")
+
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)

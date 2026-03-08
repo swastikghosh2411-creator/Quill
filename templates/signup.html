@@ -6,48 +6,70 @@
 {% endblock %}
 
 {% block body %}
-<div class = "page">
-<h1>Sign Up</h1>
+<div class="page">
 
-<div class="form">
-<form method="POST" autocomplete="off" class = "form-register">
+    <div class="form">
+        <h1 style="text-align:center; color:#482d6f; margin-bottom:20px;">
+            Create your account
+        </h1>
 
-    <p>
-        <i class="fa-solid fa-user" style="color: #482d6f;"></i>
-        {{ form.username(placeholder ="Username" ,size=30) }}
-        {% for error in form.username.errors %}
-            <span style="color:red;">{{ error }}</span>
-        {% endfor %}
-    </p>
+        <form method="POST" autocomplete="off" class="form-register">
+            {{ form.hidden_tag() }}
 
-    <p>
-        <i class="fa-solid fa-envelope" style="color: #482d6f;"></i>
-        {{ form.email(placeholder="Email",size=30) }}
-        {% for error in form.email.errors %}
-            <span style="color:red;">{{ error }}</span>
-        {% endfor %}
-    </p>
+            <!-- Username -->
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                {{ form.username(
+                    placeholder="Username",
+                    class_="form-input"
+                )}}
+                {% for error in form.username.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
 
-    <p>
-        <i class="fa-solid fa-lock" style="color: #482d6f;"></i>
-        {{ form.password(placeholder="Password",size=30, autocomplete="new-password") }}
-        {% for error in form.password.errors %}
-            <span style="color:red;">{{ error }}</span>
-        {% endfor %}
-    </p>
+            <!-- Email -->
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                {{ form.email(
+                    placeholder="Email",
+                    class_="form-input"
+                )}}
+                {% for error in form.email.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
 
-    <p>
-        <i class="fa-solid fa-lock" style="color: #482d6f;"></i>
-        {{ form.confirm_password(placeholder="Confirm Password",size=30, autocomplete="new-password") }}
-        {% for error in form.confirm_password.errors %}
-            <span style="color:red;">{{ error }}</span>
-        {% endfor %}
-    </p>
+            <!-- Password -->
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                {{ form.password(
+                    placeholder="Password",
+                    autocomplete="new-password",
+                    class_="form-input"
+                )}}
+                {% for error in form.password.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
 
-    <p>
-        {{ form.submit() }}
-    </p>
-</form>
-</div>
+            <!-- Confirm Password -->
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                {{ form.confirm_password(
+                    placeholder="Confirm Password",
+                    autocomplete="new-password",
+                    class_="form-input"
+                )}}
+                {% for error in form.confirm_password.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- Submit -->
+            {{ form.submit(class_="submit-btn") }}
+        </form>
+    </div>
+
 </div>
 {% endblock %}

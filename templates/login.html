@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h1>Login to Quill</h1>
+
+        <form method="POST" class="login-form">
+
+            {{ form.hidden_tag() }}
+
+            <!-- Email -->
+            <div class="input-group">
+                {{ form.email(
+                    placeholder="Email",
+                    class_="input-field"
+                ) }}
+
+                {% for error in form.email.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- Password -->
+            <div class="input-group">
+                {{ form.password(
+                    placeholder="Password",
+                    class_="input-field"
+                ) }}
+
+                {% for error in form.password.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- Submit Button -->
+            {{ form.submit(class_="login-btn") }}
+
+        </form>
+
+        <p class="signup-link">
+            Don't have an account?
+            <a href="{{ url_for('signup') }}">Sign up</a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
