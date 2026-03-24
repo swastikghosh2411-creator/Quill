@@ -15,18 +15,20 @@ app = Flask(__name__)
 # Use environment variable for secret key (production safe)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key')
 
-# MySQL Database Configuration via environment variables
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    "connect_args": {
-        "ssl": {
-            "check_hostname": False,
-            "verify_mode": 0
-        }
-    }
-}
+# --- DATABASE CONFIGURATION START ---
+# Get the database URL from Render's environment variable
+uri = os.environ.get("DATABASE_URL")
 
+# Fix for Render: SQLAlchemy 1.4+ requires 'postgresql://' instead of 'postgres://'
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
+
+# Removed the MySQL SSL 'connect_args' as they are not needed for internal Postgres
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# --- DATABASE CONFIGURATION END ---
+
 db = SQLAlchemy(app)
 
 # --------------------------------------------------
@@ -69,7 +71,7 @@ class Feedback(db.Model):
     email = db.Column(db.String(100), nullable=False)
     message = db.Column(db.Text, nullable=False)
     date_submitted = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  # optional
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
 # --------------------------------------------------
 # Forms
@@ -145,7 +147,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash('Account created successfully!', 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('login')) # Changed index to login for better UX
     return render_template("signup.html", form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -171,12 +173,12 @@ def dashboard():
     tasks = Task.query.filter_by(user_id=user_id).order_by(Task.date_added.desc()).all()
 
     week_ago = datetime.utcnow() - timedelta(days=7)
-    sessions = StudySession.query.filter(
+    sessions_data = StudySession.query.filter(
         StudySession.user_id == user_id,
         StudySession.date >= week_ago
     ).all()
 
-    total_seconds = sum(s.duration for s in sessions)
+    total_seconds = sum(s.duration for s in sessions_data)
     total_hours = round(total_seconds / 3600, 1)
     avg_per_day = round(total_hours / 7, 1)
 
@@ -268,11 +270,14 @@ def logout():
 
 @app.route("/initdb")
 def initdb():
-    with app.app_context():
-        db.create_all()
-    return "Database initialized"
+    try:
+        with app.app_context():
+            db.create_all()
+        return "Database initialized successfully"
+    except Exception as e:
+        return f"Database initialization failed: {str(e)}"
+
 # --------------------------------------------------
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
